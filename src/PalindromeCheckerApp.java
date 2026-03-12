@@ -1,78 +1,23 @@
-class Node {
-    char data;
-    Node next;
-
-    Node(char data) {
-        this.data = data;
-        this.next = null;
-    }
-}
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class PalindromeCheckerApp {
 
-    Node head;
+    public static boolean isPalindrome(String input) {
 
-    // Add character to linked list
-    void add(char c) {
-        Node newNode = new Node(c);
+        Deque<Character> deque = new ArrayDeque<>();
 
-        if (head == null) {
-            head = newNode;
-            return;
+        for (char c : input.toCharArray()) {
+            deque.addLast(c);
         }
+        while (deque.size() > 1) {
 
-        Node temp = head;
-        while (temp.next != null) {
-            temp = temp.next;
-        }
+            char first = deque.removeFirst();
+            char last = deque.removeLast();
 
-        temp.next = newNode;
-    }
-
-    // Reverse a linked list
-    Node reverse(Node head) {
-        Node prev = null;
-        Node current = head;
-        Node next;
-
-        while (current != null) {
-            next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;
-        }
-
-        return prev;
-    }
-
-    // Check if palindrome
-    boolean isPalindrome() {
-
-        if (head == null || head.next == null)
-            return true;
-
-        Node slow = head;
-        Node fast = head;
-
-        // Find middle using fast & slow pointer
-        while (fast.next != null && fast.next.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        // Reverse second half
-        Node secondHalf = reverse(slow.next);
-
-        Node firstHalf = head;
-        Node tempSecond = secondHalf;
-
-        // Compare both halves
-        while (tempSecond != null) {
-            if (firstHalf.data != tempSecond.data)
+            if (first != last) {
                 return false;
-
-            firstHalf = firstHalf.next;
-            tempSecond = tempSecond.next;
+            }
         }
 
         return true;
@@ -80,16 +25,9 @@ public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        String input = "madam";
+        String input = "racecar";
 
-   PalindromeCheckerApp list = new PalindromeCheckerApp();
-
-        // Convert string to linked list
-        for (char c : input.toCharArray()) {
-            list.add(c);
-        }
-
-        if (list.isPalindrome()) {
+        if (isPalindrome(input)) {
             System.out.println("The string is a Palindrome.");
         } else {
             System.out.println("The string is NOT a Palindrome.");
