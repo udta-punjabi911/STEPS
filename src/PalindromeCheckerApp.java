@@ -4,7 +4,7 @@ interface PalindromeStrategy {
     boolean checkPalindrome(String input);
 }
 
-class Case_sens implements PalindromeStrategy {
+class recursions implements PalindromeStrategy {
     public boolean checkPalindrome(String input) {
         String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
         String reversed = new StringBuilder(normalized).reverse().toString();
@@ -20,7 +20,7 @@ public class PalindromeCheckerApp {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        PalindromeStrategy Case_sens = new Case_sens();
+        PalindromeStrategy Case_sens = new recursions();
 
 
         boolean result1 = Case_sens.checkPalindrome(input);
@@ -29,7 +29,7 @@ public class PalindromeCheckerApp {
 
         System.out.println("Input : " + input);
 
-        System.out.println("Reverse Strategy Result : " + result1);
+        System.out.println("Recursive palindrome result : " + result1);
 
     }
 }
