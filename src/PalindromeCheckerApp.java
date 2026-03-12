@@ -1,35 +1,98 @@
-import java.util.*;
+class Node {
+    char data;
+    Node next;
 
-interface PalindromeStrategy {
-    boolean checkPalindrome(String input);
-}
-
-class recursions implements PalindromeStrategy {
-    public boolean checkPalindrome(String input) {
-        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-        String reversed = new StringBuilder(normalized).reverse().toString();
-        return normalized.equals(reversed);
+    Node(char data) {
+        this.data = data;
+        this.next = null;
     }
 }
 
-
-
 public class PalindromeCheckerApp {
+
+    Node head;
+
+    // Add character to linked list
+    void add(char c) {
+        Node newNode = new Node(c);
+
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+
+        Node temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+
+        temp.next = newNode;
+    }
+
+    // Reverse a linked list
+    Node reverse(Node head) {
+        Node prev = null;
+        Node current = head;
+        Node next;
+
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        return prev;
+    }
+
+    // Check if palindrome
+    boolean isPalindrome() {
+
+        if (head == null || head.next == null)
+            return true;
+
+        Node slow = head;
+        Node fast = head;
+
+        // Find middle using fast & slow pointer
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Reverse second half
+        Node secondHalf = reverse(slow.next);
+
+        Node firstHalf = head;
+        Node tempSecond = secondHalf;
+
+        // Compare both halves
+        while (tempSecond != null) {
+            if (firstHalf.data != tempSecond.data)
+                return false;
+
+            firstHalf = firstHalf.next;
+            tempSecond = tempSecond.next;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+        String input = "madam";
 
-        PalindromeStrategy Case_sens = new recursions();
+   PalindromeCheckerApp list = new PalindromeCheckerApp();
 
+        // Convert string to linked list
+        for (char c : input.toCharArray()) {
+            list.add(c);
+        }
 
-        boolean result1 = Case_sens.checkPalindrome(input);
-
-
-
-        System.out.println("Input : " + input);
-
-        System.out.println("Recursive palindrome result : " + result1);
-
+        if (list.isPalindrome()) {
+            System.out.println("The string is a Palindrome.");
+        } else {
+            System.out.println("The string is NOT a Palindrome.");
+        }
     }
 }
