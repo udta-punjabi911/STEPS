@@ -58,27 +58,19 @@ public class PalindromeCheckerApp {
         PalindromeStrategy stackStrategy = new StackStrategy();
         PalindromeStrategy dequeStrategy = new DequeStrategy();
 
-        long start1 = System.nanoTime();
         boolean result1 = reverseStrategy.checkPalindrome(input);
-        long end1 = System.nanoTime();
 
-        long start2 = System.nanoTime();
         boolean result2 = stackStrategy.checkPalindrome(input);
-        long end2 = System.nanoTime();
 
-        long start3 = System.nanoTime();
         boolean result3 = dequeStrategy.checkPalindrome(input);
-        long end3 = System.nanoTime();
 
         System.out.println("Input : " + input);
 
         System.out.println("Reverse Strategy Result : " + result1);
-        System.out.println("Execution Time (ns) : " + (end1 - start1));
 
         System.out.println("Stack Strategy Result : " + result2);
-        System.out.println("Execution Time (ns) : " + (end2 - start2));
 
         System.out.println("Deque Strategy Result : " + result3);
-        System.out.println("Execution Time (ns) : " + (end3 - start3));
+
     }
 }
