@@ -4,7 +4,7 @@ interface PalindromeStrategy {
     boolean checkPalindrome(String input);
 }
 
-class ReverseStringStrategy implements PalindromeStrategy {
+class Case_sens implements PalindromeStrategy {
     public boolean checkPalindrome(String input) {
         String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
         String reversed = new StringBuilder(normalized).reverse().toString();
@@ -20,10 +20,10 @@ public class PalindromeCheckerApp {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        PalindromeStrategy reverseStrategy = new ReverseStringStrategy();
+        PalindromeStrategy Case_sens = new Case_sens();
 
 
-        boolean result1 = reverseStrategy.checkPalindrome(input);
+        boolean result1 = Case_sens.checkPalindrome(input);
 
 
 
